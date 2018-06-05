@@ -28,7 +28,8 @@ using namespace dev::solidity::smt;
 Z3Interface::Z3Interface():
 	m_solver(m_context)
 {
-	z3::set_param("rewriter.pull_cheap_ite", true);
+	//z3::set_param("rewriter.pull_cheap_ite", true);
+	Z3_set_param_value(Z3_mk_config(), "rewriter.pull_cheap_ite", "true");
 }
 
 void Z3Interface::reset()
@@ -118,7 +119,7 @@ z3::expr Z3Interface::toZ3Expr(Expression const& _expr)
 
 	string const& n = _expr.name;
 	if (m_functions.count(n))
-		return m_functions.at(n)(arguments);
+		return m_functions.at(n)(arguments.size(), &arguments[0]);
 	else if (m_constants.count(n))
 	{
 		solAssert(arguments.empty(), "");
@@ -137,7 +138,7 @@ z3::expr Z3Interface::toZ3Expr(Expression const& _expr)
 
 	solAssert(_expr.hasCorrectArity(), "");
 	if (n == "ite")
-		return z3::ite(arguments[0], arguments[1], arguments[2]);
+		return to_expr(m_context, Z3_mk_ite(m_context, arguments[0], arguments[1], arguments[2]));
 	else if (n == "not")
 		return !arguments[0];
 	else if (n == "and")

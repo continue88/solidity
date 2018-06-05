@@ -65,7 +65,9 @@ enum class Instruction: uint8_t
 	SHR,				///< bitwise SHR operation
 	SAR,				///< bitwise SAR operation
 
-	KECCAK256 = 0x20,		///< compute KECCAK-256 hash
+	KECCAK256 = 0x20,	///< compute KECCAK-256 hash
+	AESENCODE,			///< AES encode
+	AESDECODE,			///< AES decode
 
 	ADDRESS = 0x30,		///< get address of currently executing account
 	BALANCE,			///< get balance of the given account

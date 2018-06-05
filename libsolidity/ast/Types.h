@@ -923,7 +923,8 @@ public:
 		ABIEncodePacked,
 		ABIEncodeWithSelector,
 		ABIEncodeWithSignature,
-		GasLeft ///< gasleft()
+		GasLeft, ///< gasleft()
+		AESDecode,
 	};
 
 	virtual Category category() const override { return Category::Function; }

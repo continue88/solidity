@@ -712,6 +712,13 @@ bool ExpressionCompiler::visit(FunctionCall const& _functionCall)
 			m_context << Instruction::KECCAK256;
 			break;
 		}
+		case FunctionType::Kind::AESDecode:
+		{
+			arguments[0]->accept(*this);
+			arguments[1]->accept(*this);
+			m_context << Instruction::AESDECODE;
+			break;
+		}
 		case FunctionType::Kind::Log0:
 		case FunctionType::Kind::Log1:
 		case FunctionType::Kind::Log2:

@@ -2511,6 +2511,7 @@ string FunctionType::richIdentifier() const
 	case Kind::Send: id += "send"; break;
 	case Kind::Transfer: id += "transfer"; break;
 	case Kind::SHA3: id += "sha3"; break;
+	case Kind::AESDecode: id += "aesdecode"; break;
 	case Kind::Selfdestruct: id += "selfdestruct"; break;
 	case Kind::Revert: id += "revert"; break;
 	case Kind::ECRecover: id += "ecrecover"; break;
@@ -2896,6 +2897,7 @@ bool FunctionType::isPure() const
 	//        the callgraph analyzer is in place
 	return
 		m_kind == Kind::SHA3 ||
+		m_kind == Kind::AESDecode ||
 		m_kind == Kind::ECRecover ||
 		m_kind == Kind::SHA256 ||
 		m_kind == Kind::RIPEMD160 ||

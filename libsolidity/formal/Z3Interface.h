@@ -21,7 +21,7 @@
 
 #include <boost/noncopyable.hpp>
 
-#include <z3++.h>
+#include <libsolidity/formal/z3++.hpp>
 
 namespace dev
 {
